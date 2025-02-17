@@ -23,7 +23,6 @@ const videogames = [
     },
     {
         id: 'action adventure1',
-        genre: 'action adventure',
         name: 'hollow knight',
         genre: 'action-adventure',
         creator: 'Team cherry',
@@ -33,8 +32,8 @@ const videogames = [
     },
     {
         id: 'action adventure2',
-        genre: 'action adventure',
         name: 'Batman arkham knight',
+        genre: 'action-adventure',
         creator: 'Rocksteady studios',
         publisher: 'warner bros games',
         ReleaseDate: new Date('June 23, 2015'),
@@ -42,7 +41,7 @@ const videogames = [
     },
     {
         id: 'action adventure3',
-        genre: 'action adventure',
+        genre: 'action-adventure',
         name: 'Uncharted 4 thief End',
         creator: 'Naughty dog',
         publisher: 'playstation studios',
@@ -51,7 +50,7 @@ const videogames = [
     },
     {
         id: 'action adventure4',
-        genre: 'action adventure',
+        genre: 'action-adventure',
         name: 'sekiro shadows die twice',
         creator: 'fromsoftware',
         publisher: 'bandai namco',
@@ -123,7 +122,7 @@ const videogames = [
     },
     {
         id: 'action adventure5',
-        genre: 'action adventure',
+        genre: 'action-adventure',
         name: 'x-men origins wolverine',
         creator: 'Raven Studios',
         publisher: 'Activison',
@@ -132,7 +131,7 @@ const videogames = [
     },
     {
         id: 'action adventure6',
-        genre: 'action adventure',
+        genre: 'action-adventure',
         name: 'Spiderman',
         creator: 'insonamic games',
         publisher: 'Playstation studios',
@@ -159,7 +158,7 @@ const videogames = [
     },
     {
         id: 'action adventure7',
-        genre: 'action adventure',
+        genre: 'action-adventure',
         name: 'The legend of zelda breath of the wild',
         creator: 'Nintendo EPD',
         publisher: 'Nintendo',
@@ -186,7 +185,7 @@ const videogames = [
     },
     {
         id: 'rpg5',
-        genre: 'horror',
+        genre: 'rpg',
         name: "Baldur's Gate 3",
         creator: 'Larin Studios',
         publisher: 'Larin studio',
@@ -195,7 +194,7 @@ const videogames = [
     },
     {
         id: 'action adventure8',
-        genre: 'action adventure',
+        genre: 'action-adventure',
         name: 'Batman arkham city',
         creator: 'Rocksteady studios',
         publisher: 'warner bros games',
@@ -204,7 +203,7 @@ const videogames = [
     },
     {
         id: 'action adventure9',
-        genre: 'action adventure',
+        genre: 'action-adventure',
         name: 'God of War 2018',
         creator: 'Santa Monica Studio',
         publisher: 'Playstation studios',
@@ -231,7 +230,7 @@ const videogames = [
     },
     {
         id: 'action-adventure10',
-        genre: 'action adventure',
+        genre: 'action-adventure',
         name: 'Ratchet & Clank: Rift Apart',
         creator: 'Insomniac Games',
         publisher: 'Playstation Studios',
@@ -275,7 +274,7 @@ const buildCards =(Obj)=> {
     cardBody.classList.add('card-body')
 
     const cardHeader = document.createElement('div')
-    cardHeader.classList.add('text-capitalize', 'display-')
+    cardHeader.classList.add('text-capitalize', 'display-7')
     cardHeader.classList.add('card-header')
 
     const cardFooter = document.createElement('div')
@@ -289,6 +288,10 @@ const buildCards =(Obj)=> {
     name.classList.add('text-capitalize', 'display-7')
     name.innerText = Obj.name
 
+    const genre = document.createElement('h2')
+    genre.classList.add('text-capitalize', 'display-7' )
+    genre.innerText = Obj.genre
+
     const creator = document.createElement('h3')
     creator.classList.add('text-capitalize', 'display-7', 'list-group', 'list-group-flush')
     creator.innerText = Obj.creator
@@ -298,6 +301,7 @@ const buildCards =(Obj)=> {
     publisher.innerText = Obj.publisher
 
     cardHeader.appendChild(name)
+    cardHeader.appendChild(genre)
 
     cardBody.appendChild(creator)
     cardBody.appendChild(publisher)
@@ -322,10 +326,15 @@ const loadCards =(arr)=> {
 
 const loadBtn = document.getElementById('loadBtn')
 
-loadBtn.addEventListener('click', ()=> {
-    loadCards(videogames)
+loadBtn.addEventListener('click', (e)=> {
+    e.preventDefault()
+    row.innerHTML = ''
+    const genre = document.getElementById('genre').value
+
+    const cards = videogames.filter(card => card.genre == genre )
+
+    loadCards(cards)
 })
 
 let actionadventurevideogames = videogames.filter(videogame => videogame.genre == 'action adventure')
 
-console.log(actionadventurevideogames)
